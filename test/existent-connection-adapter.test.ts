@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { Enforcer, Util } from 'casbin';
-import { DataSource } from 'typeorm';
+import { createConnection } from 'typeorm';
 import TypeORMAdapter, { CasbinRule } from '../src/index';
 import { connectionConfig } from './config';
 
@@ -33,7 +33,7 @@ async function testGetFilteredPolicy(e: Enforcer, res: string[]) {
 test(
   'TestAdapter',
   async () => {
-    const connection = await new DataSource({
+    const connection = await createConnection({
       ...connectionConfig,
       entities: [CasbinRule],
       synchronize: true,
